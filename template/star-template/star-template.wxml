@@ -1,0 +1,11 @@
+<template name="star-template">
+<view class="star-container">
+<block  wx:for="{{stars}}" wx:for-item="num">
+<view class="stars">
+<image wx:if="{{num}}" src="/image/icon/star.png"></image>
+<image wx:else src="/image/icon/none-star.png"></image>
+</view>
+</block>
+<text class="star-score" style='margin-bottom: 16rpx;font-size: 24rpx;'>{{movieAverage}}</text>
+</view>
+</template>

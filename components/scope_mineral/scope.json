@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "waiting": "/components/waiting/waiting"
+  }
+}

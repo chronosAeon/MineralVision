@@ -1,0 +1,9 @@
+ @import "/template/movie-item/movie-item.wxss"; 
+ @import "/utils/animate.wxss";
+.itemContainer{
+    float: left;
+}
+.gridContainer{
+    margin: 40rpx 0 40rpx 6rpx;
+    animation: fadeinT 3s;
+}

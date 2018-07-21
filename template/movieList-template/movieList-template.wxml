@@ -1,0 +1,20 @@
+<import src="/template/movie-item/movie-item.wxml"/>
+<template name="movieList-template">
+<view class="movieList-container">
+<view class="movieList-innercontainer">
+<view class="movieList-head">
+<text class="slogan">{{categoryTitle}}</text>
+<view class="more" catchtap="moreTap" data-category="{{categoryTitle}}">
+<text class="more-text">更多</text>
+<image class="more-img" src="/image/icon/arrow-right.png"></image>
+</view>
+</view>
+<view class="movies-container">
+<block wx:for="{{movies}}"  wx:for-item="item">
+<!--关于这个wx:key这个属性请看文档wx：for这个东西，我也不是太了解只是这样写可以不报警告而已-->
+<template is="movie-item" data="{{...item}}"/>
+</block>
+</view>
+</view>
+</view>
+</template>

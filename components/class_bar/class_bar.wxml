@@ -1,0 +1,16 @@
+<import src="/template/moviegrid-template/moviegrid-template.wxml" />
+<view style='background-image:url({{ background_img}})' class='contianer' style='margin-left:{{margin_left}}'>
+  <view class='a_class_bar'>
+
+    <view catchtap='show_list' class='show_list'>
+      <text class="{{isshowfriend?'rowimg_show':'rowimg'}}"></text>
+      <view>{{self_object.name}}</view>
+    </view>
+    <view hidden='{{!isshowfriend}}' class='friendlist'>
+      <block wx:for='{{self_object.children}}' wx:key='{{item}}'>
+         <class_bar classes='{{item}}' indent='{{next_m_l}}' style='height:10%'></class_bar>
+      </block>
+        <template class="temp_class" style="width:100%" is="grid-template" data="{{movies}}" /> 
+    </view>
+  </view>
+</view>
