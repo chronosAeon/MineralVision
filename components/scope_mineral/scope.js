@@ -7,7 +7,7 @@ Component({
     img_url: String,
     angle: Number,
     centerX: Number,
-    centerY: Number
+    centerY: Number,
   },
 
   /**
@@ -27,7 +27,7 @@ Component({
       ready:false
     })
     wx.downloadFile({
-      url: 'http://www.netdcg.cdut.edu.cn:8080/media/samples/microscope/869/0_u5341u5b57u77f3/-N/l.jpg',
+      url: this.data.img_url,
       success:  res=> {
         // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
         //每次下载一次都要有缓存机制，就不用每次微信服务器都取下载一次图片
