@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "scope": "/components/scope_mineral/scope",
-    "waiting":"/components/waiting/waiting"
-  }
-}

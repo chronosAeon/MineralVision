@@ -1,3 +1,0 @@
-<block wx:for="{{tree_data}}">
-  <class_bar classes='{{item}}' indent='{{0}}' style='height:10%'></class_bar>
-</block>
