@@ -1,0 +1,4 @@
+<!-- <view wx:if="{{ready}}"> -->
+  <canvas id='kv' style='width:100%;height:285px;margin-left:0rpx;' canvas-id='mycanvas' disable-scroll='{{true}}' bindtouchstart='touchstart' bindtouchmove='touchmove' bindtouchend='touchend'></canvas>
+<!-- <!-- </view> -->
+<!-- <view wx:else><waiting></waiting></view>  -->
