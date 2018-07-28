@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    test_url:'http://www.netdcg.cdut.edu.cn:8080/media/samples/microscope/869/0_u5341u5b57u77f3/-N/l.jpg'
   },
 
   /**
