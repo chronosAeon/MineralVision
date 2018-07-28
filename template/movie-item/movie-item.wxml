@@ -1,8 +1,7 @@
 <import src="/template/star-template/star-template.wxml" />
 <template name="movie-item">
-  <view class="movieitem-container" catchtap="movieTap" data-id="{{movieId}}">
-    <image class="movieitem-img" src="{{movieImg}}"></image>
-    <text class="movieitem-title" style='margin-bottom: 16rpx;font-size: 24rpx;'>{{movieTitle}}</text>
-    <!-- <template is="star-template" data="{{movieAverage:movieAverage,stars:stars}}"/> -->
+  <view class="movieitem-container" catchtap="DetailTap" data-id="{{id}}">
+    <!-- <image class="movieitem-img" src="{{Img_url}}"></image> -->
+    <text class="movieitem-title" style='margin-bottom: 16rpx;font-size: 24rpx;'>{{name}}</text>
   </view>
 </template>
