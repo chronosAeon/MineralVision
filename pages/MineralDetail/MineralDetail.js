@@ -5,48 +5,127 @@ Page({
    * 页面的初始数据
    */
   data: {
-    test_url:'http://www.netdcg.cdut.edu.cn:8080/media/samples/microscope/869/0_u5341u5b57u77f3/-N/l.jpg'
+    k: null,
+    k_show:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.init_scope()
-  
-  },
-  onPullDownRefresh: function () {
+  onLoad: function(options) {
+    
+    console.log(options)
     this.setData({
-      loadingHidden: false
-    });
-    var that = this;
-    // wx.request({
-    //   url: 'https://www.geekxz.com/action/works/recWorks',
-    //   data: {
-    //     num: '5',
-    //   },
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success: function (res) {
-    //     console.log(res.data.data.works);
-    //     that.setData({
-    //       recWorks: res.data.data.works,
-    //     })
-    //   },
-    //   complete: function () {        // complete
-    //     wx.hideNavigationBarLoading() //完成停止加载
-    //     wx.stopPullDownRefresh()      //停止下拉刷新
-    //   }
-    // })
-     setTimeout(function () {
-       that.setData({
-         loadingHidden: true
-       });
-     }, 2000);
-  },
+      id: options.id,
+    })
+    // var that = this
+    wx.request({
+      url: 'http://www.netdcg.cdut.edu.cn:8080/default/api/getItemDetailByid?id=' + this.data.id + '&key=nOngSiGuapIzHAnG',
+      success: res => {
+        console.log(res)
+        //获取转盘长图的url
+        //判断是否是有
 
-  init_scope:function(){
+        //检测是否有+N和-N属性
+        var N = null
+        var n = null
+        if (res.data.baopians[res.data.name]['+N'] != undefined) {
+          var N = 'http://202.115.137.42:8080/' + res.data.baopians[res.data.name]['+N'].path + '/l.jpg'
+        }
+        if (res.data.baopians[res.data.name]['-N'] != undefined) {
+          var n = 'http://202.115.137.42:8080/' + res.data.baopians[res.data.name]['-N'].path + '/l.jpg'
+        }
+        //测试数据绑定
+        var k = 'http://202.115.137.42:8080//media/samples/microscope/889/0_u6ed1u77f3/+N/l.jpg'
+        
+        this.setData({
+          result: res.data,
+          N: N,
+          n: n,
+          k: k
+        })
+        if(k){
+          this.setData({
+            k_show:true
+          })
+          this.init_scope()
+        }
+        console.log(this.data.N)
+        console.log(this.data.n)
+        var msg = this.data.result.desc
+        //处理<img>逻辑
+        var reg = /\/.*jpg/g //匹配图片网址
+        var ImgUrlArr = msg.match(reg) //获得图片网址
+        var VideoUrlArr = msg.match(/\/.*\.mp4/g) //获取video的网址
+        console.log(ImgUrlArr)
+        console.log(VideoUrlArr)
+
+        // 代替所有的空格符
+        msg = msg.replace(/\s*/g, '');
+        console.log(msg)
+
+        var array = msg.split(/<\/?[A-Za-z]*>/) //用所有文本标签分割
+
+        //去掉数组中的空串
+        for (var i = 0; i < array.length; i++) {
+          if (array[i] == '') {
+            array.splice(i, 1)
+            i--
+          }
+        }
+        console.log(array)
+        var ImgNum = 1
+        var VideoNum = 10
+        //处理图片 将数组中含有img的用0-9的数字代替，方便获取图片
+        for (var i = 0; i < array.length; i++) {
+
+          var a = array[i].toString().match(/<i.*>/)
+          if (a != null) {
+            array[i] = ImgNum++
+          }
+
+          // console.log(array[i].toString().match(/<i.*>/) == null)
+        }
+        console.log(array)
+
+        //同样的方法 用10~xx代替video
+        for (var i = 0; i < array.length; i++) {
+          var a = array[i].toString().match(/<v.*>/)
+          if (a) {
+            array[i] = VideoNum++
+          }
+        }
+
+        console.log(array)
+
+        //处理化学式   转化为字母数组 再惊行一个个输出
+        var formula = this.data.result.formula
+        formula = formula.replace(/<sub>/g, '')
+        formula = formula.replace(/<\/sub>/g, '')
+        formula = formula.replace(/<sup>/g, '')
+        formula = formula.replace(/<\/sup>/g, '')
+
+        var a = 'aaaa'
+
+        var arr = []
+        for (var i = 0; i < formula.length; i++) {
+          arr.push(formula.charAt(i))
+        }
+        console.log(arr)
+        this.setData({
+          arr: arr,
+          array: array,
+          ImgUrlArr: ImgUrlArr,
+          VideoUrlArr: VideoUrlArr
+        })
+      }
+    })
+
+
+
+
+  },
+  init_scope: function() {
     var query = wx.createSelectorQuery();
     //选择id
     query.select('#kz').boundingClientRect()
@@ -64,49 +143,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
-  },
+  onShow: function() {
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

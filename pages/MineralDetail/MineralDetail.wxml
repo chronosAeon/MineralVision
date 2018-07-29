@@ -1,2 +1,55 @@
-<scope id='kz' img_url='{{test_url}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
-<!-- <scope img_url='http://www.netdcg.cdut.edu.cn:8080/media/samples/microscope/869/0_u5341u5b57u77f3/-N/l.jpg' id='kz' centerX='{{centerX}}' centerY='{{centerY}}'></scope> -->
+<swiper style='width: 100%;height: 500rpx;' autoplay='true' indicator-dots="true">
+  <block wx:for='{{result.imgthumb}}'>
+    <swiper-item>
+      <image src='{{item}}' class='image' mode='scaleToFill'></image>
+    </swiper-item>
+  </block>
+</swiper>
+<view>
+  <text style='font-size: 46rpx; color: #8799DA;'>基本信息</text>
+  <view class='detail'>
+    <view style='border-right: 7px solid #eee;height:260rpx;margin-left:10rpx;'></view>
+    <view>
+      <view class='information'>
+        <text style='margin-right:100rpx;margin-left:20rpx;'>标本名:{{result.name}}</text>
+        <text>英文名:{{result.nameen}}</text>
+      </view>
+      <view class='information' style='background-color:#fff;padding-left:25rpx'>
+        晶体化学式:
+      </view>
+      <view class='information' style='background-color:#eee;display: flex;flex-direction: row;'>
+        <block wx:for='{{arr}}'>
+          <view class="{{arr[index] <10 && arr[index+1] != '+' && arr[index+1] != '-'?'sub':''}}" style="{{(arr[index+1]=='+' || arr[index+1]=='-' && arr[index] <10)||( arr[index] == '+' || arr[index] == '-')?'font-size:28rpx;marign-bottom:20rpx':'' }}">{{item}}</view>
+        </block>
+
+      </view>
+      <view class='information' style='background-color:#fff;'>
+        <text style='margin-left:25rpx;'>基本分类:</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='margin-top:30rpx;'>
+  <text style='font-size: 46rpx; color: #8799DA;'>镜下特征</text>
+  <view style='border-bottom: 1px solid #eee;margin-top:30rpx;'>
+    <text style='font-size: 38rpx; color: #8799DA;'>描述</text>
+
+    <block wx:for="{{array}}">
+      <view wx:if="{{item<10}}">
+        <image src="http://202.115.137.42:8080/media/samples/micro_pics{{ImgUrlArr[item-1]}}"></image>
+      </view>
+      <view wx:elif="{{item>=10}}">
+        <video src='http://202.115.137.42:8080/media/samples/micro_pics{{VideoUrlArr[item-10]}}'></video>
+      </view>
+      <view wx:else="{{item}}">{{item}}</view>
+
+    </block>
+  </view>
+  <view style='margin-top:30rpx;'>
+    <text style='font-size: 38rpx; color: #8799DA;'>虚拟显微镜</text>
+    <view wx:if='{{k_show}}'>
+    <scope   id='kz' img_url='{{k}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    </view>
+    <scope  wx:if='{{k_show}}' id='kz' img_url='{{k}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+  </view>
+</view>

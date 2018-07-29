@@ -11,7 +11,7 @@
 .search{
     animation: fadeinT 3s;
     background-color: #f2f2f2;
-    height: 80rpx;
+    height: 100rpx;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -24,47 +24,28 @@
 }
 .search input{
     height: 100%;
-    width: 600rpx;
+    width: 550rpx;
     margin-left: 20px;
-    font-size: 28rpx;
+
 }
 .placehoder{
     font-size: 14px;
     color: #d1d1d1;
     margin-left: 20rpx;
 }
-/* .row_title {
-  width: 100%;
-  height: 100rpx;
-  margin-top: 30%;
-  margin-left: 20%;
-  line-height:100rpx;
-  background-color: #fff;
-  display: flex;
-  flex-direction: row;
+.search-bt{
+
+  padding-top:25rpx;
+  margin-left: 10rpx;
 }
-.row_title_t {
-  margin-top: 5rpx;
-  margin-right: 20rpx;
-  color: #999;
-  font-size: 20px;
+.container-image{
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.image{
+  width:650rpx;
+  height:500rpx;
+  margin-left:50rpx;
 }
 
-.row_title_i {
-  margin-top: 28rpx;
 
-}
-.row_title_icon{
-  margin-left: 30rpx;
-  margin-top: 30rpx;
-
-}
-.searchText{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 23px;
-   border-bottom: 1px solid #cc9; 
-  padding-top: 30rpx;
-  height: 100rpx;
-} */
