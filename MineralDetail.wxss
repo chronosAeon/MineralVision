@@ -1,0 +1,28 @@
+.container-image{
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.image{
+  margin-left:50rpx;
+}
+.detail{
+  display: flex;
+  flex-direction: row;
+}
+.information{
+  background-color:#F9F9F9;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  margin-left: 25rpx;
+  width: 700rpx;
+  height:60rpx;
+}
+.sub{
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+.arr{
+  background-color:#fff;
+  display: flex;
+  flex-direction: row;
+}

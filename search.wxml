@@ -1,5 +1,4 @@
-
- <swiper hidden='{{focus}}' catchtap="swiperTap" indicator-dots="true" class="swiper" autoplay="true" interval="5000">
+<swiper hidden='{{focus}}' catchtap="swiperTap" indicator-dots="true" class="swiper" autoplay="true" interval="5000">
   <swiper-item>
     <image src="/image/mineral/gangyu.jpg" data-postId="{{0}}" class="swiper-image"></image>
   </swiper-item>
@@ -8,22 +7,29 @@
   </swiper-item>
 </swiper> 
 <!-- <search_bar style='margin-left:-200rpx'></search_bar> -->
-<view class="search" style='{{focus?"animation: fadeinT 3s":null}}'>
+<view class="search" style='{{focus?"animation: Fadein 3s":null}}'>
   <icon class="search-img" type="search" size="13" color="#405f80"></icon>
   <input type="text" placeholder='{{example}}' placeholder-class="placehoder" bindfocus="onFocus" bindblur="blurFocus" bindinput="bindKeyInput" />
   <view class='search-bt' hidden='{{!focus}}' catchtap='search'>搜索</view>
 </view>
 <view class='used' hidden='{{focus}}'>
-<text>以下是常用搜索，一开始初始化的是默认比较常用的物体，然后之后是按照搜索排序</text>
+  <text>以下是常用搜索，一开始初始化的是默认比较常用的物体，然后之后是按照搜索排序</text>
 </view>
 <view wx:if='{{result != null}}' style='margin-top:50rpx;' >
-  <block wx:for='{{result}}'>
-    <view data-id='{{item.id}}' catchtap='showDetail'>
-      <view class='container-image'>
-        <image src='{{item.Img_url}}' class='image' mode='aspectFit'></image>
-      </view>
-        <text style='font-size: 46rpx; color: #8799DA;margin-left:300rpx;'>{{item.name}}</text>
-    </view>
-  </block>
+  <swiper indicator-dots="{{result.length>1?true:false}}" class="swiper" autoplay="true" interval="5000" bindchange='changeId' >
+    <block wx:for='{{result}}'>
+      <swiper-item>
+        <view data-id='{{item.id}}' catchtap='showDetail'>
+          <view class='container-image'>
+            <image src='{{item.Img_url}}' class='image' mode='aspectFit'></image>
+          </view>
+        </view>
+      </swiper-item>
+      
+    </block>
+  </swiper>
+  <view style='font-size: 46rpx; color: #8799DA;text-align: center;' data-id='{{result[index].id}}' catchtap='showDetail'>
+    {{result[index].name}}
+  </view>
 </view> 
 <!-- </view> -->

@@ -1,32 +1,37 @@
-<!--pages/MineralDetail/MineralDetail.wxml-->
-<swiper autoplay='true' indicator-dots="true">
+<swiper style='width: 100%;height: 500rpx;' autoplay='true' indicator-dots="true">
   <block wx:for='{{result.imgthumb}}'>
-      <swiper-item>
-        <image src='{{item}}' class='image' mode='scaleToFill'></image>
-      </swiper-item>
+    <swiper-item>
+      <image src='{{item}}' class='image' mode='scaleToFill'></image>
+    </swiper-item>
   </block>
 </swiper>
 <view>
   <text style='font-size: 46rpx; color: #8799DA;'>基本信息</text>
   <view class='detail'>
-    <view style='border-right: 7px solid #eee;height:260rpx;margin-left:10rpx;'></view>
+    <view style='border-right: 7px solid #eee;margin-left:10rpx;'></view>
     <view>
       <view class='information'>
         <text style='margin-right:100rpx;margin-left:20rpx;'>标本名:{{result.name}}</text>
-        <text>英文名:{{result.nameen}}</text>
+     
       </view>
-      <view class='information' style='background-color:#fff;padding-left:25rpx'>
-        晶体化学式:
+      <view class='information' style='background-color:#fff;' >
+        <text style='margin-left:20rpx;'>英文名:{{result.nameen}}</text>
       </view>
-      <view class='information' style='background-color:#eee;display: flex;flex-direction: row;'>
+      <view wx:if='{{formula}}' class='information'>
+         <text style='margin-right:100rpx;margin-left:20rpx;'>晶体化学式:</text>
+      </view>
+      <view wx:if='{{formula}}' class='information arr' style="{{formula.length <33? 'padding-left:24rpx':''}}">
         <block wx:for='{{arr}}'>
-          <view class="{{arr[index] <10 && arr[index+1] != '+' && arr[index+1] != '-'?'sub':''}}" style="{{(arr[index+1]=='+' || arr[index+1]=='-' && arr[index] <10)||( arr[index] == '+' || arr[index] == '-')?'font-size:28rpx;marign-bottom:20rpx':'' }}">{{item}}</view>
+          <view class="{{arr[index] <10 && arr[index+1] != '+' && arr[index+1] != '-'?'sub':''}}" style="{{(arr[index+1]=='+' || arr[index+1]=='-' && arr[index] <10)||( arr[index] == '+' || arr[index] == '-')?'font-size:28rpx;marign-bottom:15rpx':'' }}">{{item}}</view>
         </block>
 
       </view>
-      <view class='information' style='background-color:#fff;'>
+      <view class='information' >
         <text style='margin-left:25rpx;'>基本分类:</text>
-      </view> 
+      </view>
+      <view class='information' style='background-color:#fff;' >
+        <text style='margin-left:20rpx;'>xxx/xxxx/xxx</text>
+      </view>
     </view>
   </view>
 </view>
@@ -40,15 +45,21 @@
         <image src="http://202.115.137.42:8080/media/samples/micro_pics{{ImgUrlArr[item-1]}}"></image>
       </view>
       <view wx:elif="{{item>=10}}">
-        <video src='http://202.115.137.42:8080/media/samples/micro_pics{{VideoUrlArr[item-10]}}'></video>
+        <video src='http://202.115.137.42:8080/media/samples/videos{{VideoUrlArr[item-10]}}'></video>
       </view>
       <view wx:else="{{item}}">{{item}}</view>
-      
+
     </block>
   </view>
-  <view style='margin-top:30rpx;'>
+  <view wx:if='{{hasbaopians}}' style='margin-top:30rpx;'>
     <text style='font-size: 38rpx; color: #8799DA;'>虚拟显微镜</text>
-     <scope id='kz' img_url='{{N}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope> 
-    <scope  id='kz' img_url='{{n}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    <view wx:if='{{N}}'>
+    <text>正交偏光:</text>
+    <scope   id='kz' img_url='{{N}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    </view>
+    <view wx:if='{{n}}'>
+    <text>单偏光:</text>
+    <scope id='kz' img_url='{{n}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    </view>
   </view>
 </view>

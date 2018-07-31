@@ -2,7 +2,8 @@ const app = getApp()
 
 Page({
   data: {
-    example:'铁矿石，石英'
+    example:'铁矿石，石英',
+    index:0
   },
   onLoad: function () {
 
@@ -58,8 +59,11 @@ Page({
             duration: 2000
           })
         }else{
+          console.log(res.data)
+          console.log(res.data.length)
           that.setData({
-            result: res.data
+            result: res.data,
+            focus: true
             })        
           }
       },
@@ -73,6 +77,12 @@ Page({
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '/pages/MineralDetail/MineralDetail?id='+ id
+    })
+  },
+  changeId:function(e){
+    console.log(e.detail.current)
+    this.setData({
+      index: e.detail.current
     })
   }
   
