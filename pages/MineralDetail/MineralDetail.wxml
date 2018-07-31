@@ -14,10 +14,10 @@
         <text style='margin-right:100rpx;margin-left:20rpx;'>标本名:{{result.name}}</text>
         <text>英文名:{{result.nameen}}</text>
       </view>
-      <view class='information' style='background-color:#fff;padding-left:25rpx'>
+      <view wx:if='{{formula}}' class='information' style='background-color:#fff;padding-left:25rpx'>
         晶体化学式:
       </view>
-      <view class='information' style='background-color:#eee;display: flex;flex-direction: row;'>
+      <view wx:if='{{formula}}' class='information' style='background-color:#eee;display: flex;flex-direction: row;'>
         <block wx:for='{{arr}}'>
           <view class="{{arr[index] <10 && arr[index+1] != '+' && arr[index+1] != '-'?'sub':''}}" style="{{(arr[index+1]=='+' || arr[index+1]=='-' && arr[index] <10)||( arr[index] == '+' || arr[index] == '-')?'font-size:28rpx;marign-bottom:20rpx':'' }}">{{item}}</view>
         </block>
@@ -45,11 +45,15 @@
 
     </block>
   </view>
-  <view style='margin-top:30rpx;'>
+  <view wx:if='{{hasbaopians}}' style='margin-top:30rpx;'>
     <text style='font-size: 38rpx; color: #8799DA;'>虚拟显微镜</text>
-    <view wx:if='{{k_show}}'>
-    <scope   id='kz' img_url='{{k}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    <view wx:if='{{N}}'>
+    <text>正交偏光:</text>
+    <scope   id='kz' img_url='{{N}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
     </view>
-    <scope  wx:if='{{k_show}}' id='kz' img_url='{{k}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    <view wx:if='{{n}}'>
+    <text>单偏光:</text>
+    <scope id='kz' img_url='{{n}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    </view>
   </view>
 </view>

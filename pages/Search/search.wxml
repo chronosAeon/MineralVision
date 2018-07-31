@@ -8,7 +8,7 @@
   </swiper-item>
 </swiper> 
 <!-- <search_bar style='margin-left:-200rpx'></search_bar> -->
-<view class="search" style='{{focus?"animation: fadeinT 3s":null}}'>
+<view class="search" style='{{focus?"animation: Fadein 3s":null}}'>
   <icon class="search-img" type="search" size="13" color="#405f80"></icon>
   <input type="text" placeholder='{{example}}' placeholder-class="placehoder" bindfocus="onFocus" bindblur="blurFocus" bindinput="bindKeyInput" />
   <view class='search-bt' hidden='{{!focus}}' catchtap='search'>搜索</view>
