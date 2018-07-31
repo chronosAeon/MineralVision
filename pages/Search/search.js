@@ -14,18 +14,19 @@ Page({
     })
   },
   blurFocus: function (event) {
+    console.log('blur')
     //失去聚焦
     var inputContent = event.detail.value;
     this.setData({
       focus: false
     })
   },
-  cancelTap: function (event) {
-    console.log('cancel')
-    this.setData({
-      focus: false
-    })
-  },
+  // cancelTap: function (event) {
+  //   console.log('cancel')
+  //   this.setData({
+  //     focus: false
+  //   })
+  // },
   bindKeyInput: function (e) {
     this.setData({
       inputValue: e.detail.value
