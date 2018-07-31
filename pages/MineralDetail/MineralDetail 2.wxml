@@ -24,7 +24,7 @@
 
       </view>
       <view class='information' style='background-color:#fff;'>
-        <text style='margin-left:25rpx;'>基本分类:{{belong}}</text>
+        <text style='margin-left:25rpx;'>基本分类:</text>
       </view>
     </view>
   </view>

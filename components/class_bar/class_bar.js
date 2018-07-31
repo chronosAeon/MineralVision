@@ -17,28 +17,10 @@ Component({
    * 组件的初始数据
    */
   data: {
-    // items: [{
-    //   id: 326,
-    //   item_img: "/image/mineral/gangyu.jpg",
-    //   title: "刚玉"
-    // }, {
-    //   id: 305,
-    //   item_img: "/image/mineral/fangjieshi.jpg",
-    //   title: "方解石"
-    // }, {
-    //   movieId: 313,
-    //   item_img: "/image/mineral/fangnashi.jpg",
-    //   title: "方钠石"
-    // }, {
-    //   movieId: 314,
-    //   item_img: "/image/mineral/youlianshi.jpg",
-    //   title: "黝帘石"
-    // }]
     show_list_flag:false
   },
   attached: function() {
     // console.log(this.data.classes)
-    // this.get_items_data()
     this.set_indent()
 
   },
@@ -66,6 +48,7 @@ Component({
         margin_left: this.data.indent,
         next_m_l: next_margin_left
       })
+      // console.log(this.data.self_object)
     },
     show_list: function(e) {
       if(!this.data.show_list_flag){

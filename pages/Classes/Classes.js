@@ -26,9 +26,12 @@ Page({
           class_tree_data = res.data
         }
         var tree = new this.treeUtil(class_tree_data, 'id', 'pid');
+        
         this.setData({
           tree_data: tree.toTree()
         })
+        app.globalData.class_tree = this.data.tree_data
+        console.log(this.data.tree_data)
       }
     })
   },

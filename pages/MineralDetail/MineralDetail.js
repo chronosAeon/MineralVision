@@ -1,4 +1,5 @@
 // pages/MineralDetail/MineralDetail.js
+const app = getApp()
 Page({
 
   /**
@@ -12,7 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log(app.globalData.class_tree)
     this.setData({
       id: options.id,
     })
@@ -21,6 +22,8 @@ Page({
       url: 'http://www.netdcg.cdut.edu.cn:8080/default/api/getItemDetailByid?id=' + this.data.id + '&key=nOngSiGuapIzHAnG',
       success: res => {
         console.log(res)
+        //找到分类
+        this.get_self_class(app.globalData.class_tree, res.data.pid)
         //获取转盘长图的url
         //判断是否是有
 
@@ -30,10 +33,10 @@ Page({
         if (res.data.baopians.length > 0 || res.data.baopians.length == undefined) {
           for (var name in res.data.baopians) {
             if (res.data.baopians[name]['+N'] != undefined) {
-              var N = 'http://202.115.137.42:8080/' + res.data.baopians[name]['+N'].path + '/l.jpg'
+              N = 'http://202.115.137.42:8080/' + res.data.baopians[name]['+N'].path + '/l.jpg'
             }
             if (res.data.baopians[name]['-N'] != undefined) {
-              var n = 'http://202.115.137.42:8080/' + res.data.baopians[name]['-N'].path + '/l.jpg'
+              n = 'http://202.115.137.42:8080/' + res.data.baopians[name]['-N'].path + '/l.jpg'
             }
             // if（res.data.baopians[name]['Cl']
           }
@@ -116,8 +119,7 @@ Page({
             ImgUrlArr: ImgUrlArr,
             VideoUrlArr: VideoUrlArr
           })
-        } 
-        else {
+        } else {
           this.setData({
             array: array,
             ImgUrlArr: ImgUrlArr,
@@ -151,7 +153,43 @@ Page({
   onReady: function() {
 
   },
-
+  get_self_class: function(tree_array, id) {
+    console.log(id)
+    //通过当前id在分类树里面查找分类
+    //tree 里面的id等于id
+    // console.log(this.tree_serach(tree_array[1], 650, tree_array[1].name))
+    for (var i = 0; i < tree_array.length; i++) {
+      this.tree_serach(tree_array[i], id, tree_array[i].name)
+    //   console.log(belong)
+    //   if (belong != undefined) {
+    //     this.setData({
+    //       belong:belong
+    //     })
+    //     console.log(this.data.belong)
+    //   }
+    }
+  },
+  tree_serach: function(tree, id, name,flag = false) {
+    console.log(tree)
+    
+    for (var i = 0; i < tree.children.length; i++) {
+      if ( parseInt(tree.children[i].id) == id) {
+        // console.log(name)
+        //要拿到数据必须是用全局变量，不能通过return获得
+        this.setData({
+          belong: name + '/' + tree.children[i].name
+        })
+        return name + '/' + tree.children[i].name
+        
+      } else {
+        this.tree_serach(tree.children[i], id, name + '/'+tree.children[i].name)
+      }
+    }
+    if (!tree.children.length) {
+      //没有子节点
+      return null
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */

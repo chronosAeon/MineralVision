@@ -8,7 +8,7 @@
     </view>
     <view hidden='{{!isshowfriend}}' class='friendlist'>
       <block wx:for='{{self_object.children}}' wx:key='{{item}}'>
-         <class_bar classes='{{item}}' data-id='{{item.id}}' indent='{{next_m_l}}' style='height:10%'></class_bar>
+         <class_bar  classes='{{item}}' data-id='{{item.id}}' indent='{{next_m_l}}' style='height:10%'></class_bar>
       </block>
         <template class="temp_class" style="width:100%" is="grid-template" data="{{items}}" /> 
     </view>

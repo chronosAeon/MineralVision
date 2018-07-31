@@ -8,12 +8,13 @@
   </swiper-item>
 </swiper> 
 <!-- <search_bar style='margin-left:-200rpx'></search_bar> -->
-<view class="search">
+<view class="search" style='{{focus?"animation: Fadein 3s":null}}'>
   <icon class="search-img" type="search" size="13" color="#405f80"></icon>
-  <input type="text" placeholder='{{example}}' placeholder-class="placehoder" bindfocus="onFocus" bindblur="blurFocus"  bindinput="bindKeyInput" bindconfirm='search' />
+  <input type="text" placeholder='{{example}}' placeholder-class="placehoder" bindfocus="onFocus" bindblur="blurFocus" bindinput="bindKeyInput" />
   <view class='search-bt' hidden='{{!focus}}' catchtap='search'>搜索</view>
 </view>
 <view class='used' hidden='{{focus}}'>
+<text>以下是常用搜索，一开始初始化的是默认比较常用的物体，然后之后是按照搜索排序</text>
 </view>
 <view wx:if='{{result != null}}' style='margin-top:50rpx;' >
   <block wx:for='{{result}}'>

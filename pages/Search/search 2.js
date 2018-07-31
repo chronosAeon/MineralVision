@@ -16,17 +16,16 @@ Page({
   blurFocus: function (event) {
     //失去聚焦
     var inputContent = event.detail.value;
-    console.log('ok')
     this.setData({
       focus: false
     })
   },
-  // cancelTap: function (event) {
-  //   console.log('cancel')
-  //   this.setData({
-  //     focus: false
-  //   })
-  // },
+  cancelTap: function (event) {
+    console.log('cancel')
+    this.setData({
+      focus: false
+    })
+  },
   bindKeyInput: function (e) {
     this.setData({
       inputValue: e.detail.value
