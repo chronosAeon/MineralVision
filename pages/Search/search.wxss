@@ -3,13 +3,13 @@
     margin-top: 0rpx;
     width: 100%;
     height: 500rpx;
-    animation: fadeinR 2s;
+    animation: fadein 2s;
 }
 .container{
   margin-top: 0rpx;
 }
 .search{
-    animation: fadeinT 3s;
+    /* animation: fadeinT 3s; */
     background-color: #f2f2f2;
     height: 100rpx;
     width: 100%;

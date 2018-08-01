@@ -1,0 +1,68 @@
+<swiper style='width: 100%;height: 500rpx;' autoplay='true' indicator-dots="true">
+  <block wx:for='{{result.imgthumb}}'>
+    <swiper-item>
+      <image src='{{item}}' class='image' mode='scaleToFill'></image>
+    </swiper-item>
+  </block>
+</swiper>
+<view>
+  <text style='font-size: 46rpx; color: #8799DA;'>基本信息</text>
+  <view class='detail'>
+    <view style='border-right: 7px solid #eee;height:260rpx;margin-left:10rpx;'></view>
+    <view>
+      <view class='information'>
+        <text style='margin-right:100rpx;margin-left:20rpx;'>标本名:{{result.name}}</text>
+        <text>英文名:{{result.nameen}}</text>
+      </view>
+      <view wx:if='{{formula}}' class='information' style='background-color:#fff;padding-left:25rpx'>
+        晶体化学式:
+      </view>
+      <view wx:if='{{formula}}' class='information' style='background-color:#eee;display: flex;flex-direction: row;'>
+        <block wx:for='{{arr}}'>
+          <view class="{{arr[index] <10 && arr[index+1] != '+' && arr[index+1] != '-'?'sub':''}}" style="{{(arr[index+1]=='+' || arr[index+1]=='-' && arr[index] <10)||( arr[index] == '+' || arr[index] == '-')?'font-size:28rpx;marign-bottom:20rpx':'' }}">{{item}}</view>
+        </block>
+
+      </view>
+      <view class='information' style='background-color:#fff;'>
+        <text style='margin-left:25rpx;'>基本分类:{{belong}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='margin-top:30rpx'>
+  <text style='font-size: 46rpx; color: #8799DA;'>镜下特征</text>
+  <view style='border-bottom: 1px solid #eee;margin-top:30rpx;'>
+    <text style='font-size: 38rpx; color: #8799DA;'>描述</text>
+
+    <block wx:for="{{array}}">
+      <view wx:if="{{item<10}}">
+        <image src="https://www.netdcg.cdut.edu.cn/media/samples/micro_pics{{ImgUrlArr[item-1]}}"></image>
+      </view>
+      <view wx:elif="{{item>=10}}">
+        <video src='https://www.netdcg.cdut.edu.cn/media/samples/micro_pics{{VideoUrlArr[item-10]}}'></video>
+      </view>
+      <view wx:else="{{item}}">{{item}}</view>
+
+    </block>
+  </view>
+  <view wx:if='{{hasbaopians}}' style='margin-top:30rpx;'>
+    <text style='font-size: 38rpx; color: #8799DA;'>虚拟显微镜</text>
+    <picker bindchange="bindPickerChange" value="{{scope_index}}" range="{{scope_array_name}}">
+      <view class="picker">
+        当前选择：{{scope_array_name[scope_index]}}
+      </view>
+    </picker>
+    <view wx:if='{{current_scope=="N"}}'>
+      <text>正交偏光:</text>
+      <scope id='kz' img_url='{{N}}' centerX='{{centerX}}' centerY='{{centerY}}' gypsum='{{gypsum}}' mica='{{mica}}'></scope>
+    </view>
+    <view wx:if='{{current_scope=="n"}}'>
+      <text>单偏光:</text>
+      <scope id='kz' img_url='{{n}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    </view>
+    <view wx:if='{{current_scope=="CL"}}'>
+      <text>锥光:</text>
+      <scope id='kz' img_url='{{CL}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
+    </view>
+  </view>
+</view>

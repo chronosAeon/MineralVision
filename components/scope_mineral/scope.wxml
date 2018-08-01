@@ -1,0 +1,7 @@
+
+<canvas id='kv' style='width:100%;height:285px;margin-left:0rpx;' canvas-id='mycanvas' disable-scroll='{{false}}' bindtouchstart='touchstart' bindtouchmove='touchmove' bindtouchend='touchend'></canvas>
+<view class='buttons'>
+  <text class='angle_text'>角度:{{view_angle}}</text>
+  <button bindtap='add_gypsum'>加入石膏试板</button>
+  <button bindtap='add_mica'>加入云母试板</button>
+</view>

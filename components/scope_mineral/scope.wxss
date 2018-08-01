@@ -1,0 +1,9 @@
+/* components/scope_mineral/scope.wxss */
+.buttons{
+  display: flex;
+  flex-direction: row;
+  margin-top:40rpx
+}
+.angle_text{
+  margin-top:30rpx
+}

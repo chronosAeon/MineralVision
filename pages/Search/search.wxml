@@ -1,0 +1,28 @@
+
+ <swiper hidden='{{focus}}' catchtap="swiperTap" indicator-dots="true" class="swiper" autoplay="true" interval="5000">
+  <swiper-item>
+    <image src="/image/mineral/gangyu.jpg" data-postId="{{0}}" class="swiper-image"></image>
+  </swiper-item>
+  <swiper-item>
+    <image src="/image/mineral/youlianshi.jpg" data-postId="{{1}}" class="swiper-image"></image>
+  </swiper-item>
+</swiper> 
+<!-- <search_bar style='margin-left:-200rpx'></search_bar> -->
+<view class="search">
+  <icon class="search-img" type="search" size="13" color="#405f80"></icon>
+  <input type="text" placeholder='{{example}}' placeholder-class="placehoder" bindfocus="onFocus" bindblur="blurFocus"  bindinput="bindKeyInput" bindconfirm='search' />
+  <view class='search-bt' hidden='{{!focus}}' catchtap='search'>搜索</view>
+</view>
+<view class='used' hidden='{{focus}}'>
+</view>
+<view wx:if='{{result != null}}' style='margin-top:50rpx;' >
+  <block wx:for='{{result}}'>
+    <view data-id='{{item.id}}' catchtap='showDetail'>
+      <view class='container-image'>
+        <image src='{{item.Img_url}}' class='image' mode='aspectFit'></image>
+      </view>
+        <text style='font-size: 46rpx; color: #8799DA;margin-left:300rpx;'>{{item.name}}</text>
+    </view>
+  </block>
+</view> 
+<!-- </view> -->

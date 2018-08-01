@@ -1,0 +1,5 @@
+<view class='row_title'>
+    <text class='row_title_t'>搜索</text>
+    <input placeholder="输入你想寻找的矿物" width="70%" class='row_title_i' bindinput='inputBookName'></input>
+    <icon type='search' class='row_title_icon' catchtap='searchBook'></icon>
+  </view>

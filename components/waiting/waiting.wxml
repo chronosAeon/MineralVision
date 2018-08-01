@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="loading" hidden="{{loadingHidden}}">
+    <view class="loading-center">
+      <view class="loading-center-absolute">
+        <view class="object_one"></view>
+        <view class="object_two"></view>
+        <view class="object_three"></view>
+        <view class="object_four"></view>
+        <view class="object_five"></view>
+        <view class="object_six"></view>
+        <view class="object_seven"></view>
+        <view class="object_eight"></view>
+        <view class="object_big"></view>
+      </view>
+    </view>
+  </view>
+</view>
