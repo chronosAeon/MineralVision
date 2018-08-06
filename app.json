@@ -3,7 +3,8 @@
     "pages/Search/search",
     "pages/Classes/Classes",
     "pages/MineralDetail/MineralDetail",
-    "pages/Poster/Post"
+    "pages/Poster/Post",
+    "pages/Doc/DocDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

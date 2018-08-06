@@ -4,10 +4,10 @@
   background-color: #db9e36;
   height: 285rpx;
   width: 100%;
-  position: fixed;
+  /* position: fixed; */
   z-index: 1;
-  margin-top: 0px;
-  top: 0px;
+  /* margin-top: 0px; */
+  /* top: 0px; */
 }
 
 .loading-center {

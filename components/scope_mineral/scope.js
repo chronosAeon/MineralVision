@@ -1,4 +1,7 @@
 // components/moveImg/moveImg.js
+var wxDraw = require("../../utils/wxdraw.min.js").wxDraw;
+var Shape = require("../../utils/wxdraw.min.js").Shape;
+var AnimationFrame = require("../../utils/wxdraw.min.js").AnimationFrame;
 Component({
   /**
    * 组件的属性列表
@@ -14,6 +17,8 @@ Component({
     centerY: Number,
     gypsum: String,
     mica: String,
+    //是否是单偏光
+    is_n: Boolean
   },
 
   /**
@@ -28,15 +33,16 @@ Component({
     add_gypsum_flag: false,
     mica_path: null,
     add_mica_flag: false,
-    getfocus:true
+    getfocus: true
   },
-  
+
   attached: function() {
+
     console.log(this.data.gypsum)
     console.log(this.data.mica)
     const ctx = wx.createCanvasContext('mycanvas', this)
+    var wx_draw_context = this.draw_waiting(ctx)
     console.log(this.data.img_url)
-    // console.log(this.data.centerX)
     this.setData({
       ctx: ctx,
       ready: false
@@ -54,6 +60,7 @@ Component({
             tempFilePath: rr,
             ready: true
           })
+          wx_draw_context.clear();
           ctx.drawImage(rr, 0, 0, 586, 416.666, 0, 0, 400, 285)
           ctx.draw()
         }
@@ -65,7 +72,126 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    add_gypsum: function (e) {
+
+    draw_waiting: function(canvas) {
+      // var context = wx.createCanvasContext('textA')
+
+
+
+      var wxCanvas = new wxDraw(canvas, 0, 0, 400, 285);
+
+      let text = new Shape('text', {
+        text: "矿",
+        x: 70,
+        y: 130,
+        fontSize: 50,
+        fillStyle: "#4285f4",
+        needShadow: false
+      }, 'fill', false)
+      let text2 = new Shape('text', {
+        text: "物",
+        x: 130,
+        y: 130,
+        fontSize: 50,
+        fillStyle: "#ea4335",
+        needShadow: false
+      }, 'fill', false)
+      let text3 = new Shape('text', {
+        text: "视",
+        x: 190,
+        y: 130,
+        fontSize: 50,
+        fillStyle: "#fbbc05",
+        needShadow: false
+      }, 'fill', false)
+      let text4 = new Shape('text', {
+        text: "界",
+        x: 250,
+        y: 130,
+        fontSize: 50,
+        fillStyle: "#4285f4",
+        needShadow: false
+      }, 'fill', false)
+      let text5 = new Shape('text', {
+        text: "l",
+        x: 70,
+        y: 200,
+        fontSize: 50,
+        fillStyle: "#34a853",
+        needShadow: false
+      }, 'fill', false)
+      let text6 = new Shape('text', {
+        text: "o",
+        x: 80,
+        y: 200,
+        fontSize: 50,
+        fillStyle: "#4285f4",
+        needShadow: false
+      }, 'fill', false)
+      let text7 = new Shape('text', {
+        text: "a",
+        x: 110,
+        y: 200,
+        fontSize: 50,
+        fillStyle: "#fbbc05",
+        needShadow: false
+      }, 'fill', false)
+      let text8 = new Shape('text', {
+        text: "d",
+        x: 135,
+        y: 200,
+        fontSize: 50,
+        fillStyle: "#ea4335",
+        needShadow: false
+      }, 'fill', false)
+      let text9 = new Shape('text', {
+        text: "i",
+        x: 165,
+        y: 200,
+        fontSize: 50,
+        fillStyle: "#4285f4",
+        needShadow: false
+      }, 'fill', false)
+      let text10 = new Shape('text', {
+        text: "n",
+        x: 175,
+        y: 200,
+        fontSize: 50,
+        fillStyle: "#ea4335",
+        needShadow: false
+      }, 'fill', false)
+      let text11 = new Shape('text', {
+        text: "g",
+        x: 205,
+        y: 200,
+        fontSize: 50,
+        fillStyle: "#fbbc05",
+        needShadow: false
+      }, 'fill', false)
+      let text12 = new Shape('text', {
+        text: "...",
+        x: 240,
+        y: 200,
+        fontSize: 50,
+        fillStyle: "#4285f4",
+        needShadow: false
+      }, 'fill', false)
+      wxCanvas.add(text);
+      wxCanvas.add(text2);
+      wxCanvas.add(text3);
+      wxCanvas.add(text4);
+      wxCanvas.add(text5);
+      wxCanvas.add(text6);
+      wxCanvas.add(text7);
+      wxCanvas.add(text8);
+      wxCanvas.add(text9);
+      wxCanvas.add(text10);
+      wxCanvas.add(text11);
+      wxCanvas.add(text12);
+      return wxCanvas
+    },
+    add_gypsum: function(e) {
+      console.log(this.data.gypsum)
       var gypsum_page = this.data.gypsum.replace(/(.*\/)*([^.]+).*/ig, "$2");
       console.log(gypsum_page)
       this.setData({
@@ -74,15 +200,19 @@ Component({
       if (!this.data.add_gypsum_flag) {
         this.draw_gypsum()
         this.setData({
-          add_gtpsum_flag: true
+          add_gypsum_flag: true,
+          add_mica_flag: false
+        })
+      } else {
+        this.data.ctx.drawImage(this.data.tempFilePath, 0, 0, 586, 416.666, 0, 0, 400, 285)
+        this.data.ctx.draw()
+        this.setData({
+          add_gypsum_flag: false,
+          add_mica_flag: false
         })
       }
-      else {
-        this.data.ctx.drawImage(tempFilePath, 0, 0, 586, 416.666, 0, 0, 400, 285)
-        this.data.ctx.draw()
-      }
     },
-    draw_gypsum: function () {
+    draw_gypsum: function() {
       if (!this.data.gypsum_path) {
         wx.downloadFile({
           url: this.data.gypsum,
@@ -96,35 +226,52 @@ Component({
                 gypsum_path: gypsum_path,
                 ready: true
               })
-              this.data.ctx.drawImage(gypsum_path, 0, 0, 586, 416.666, 0, 0, 400, 285)
-              this.data.ctx.draw()
+              if (!this.data.is_n) {
+                this.data.ctx.drawImage(gypsum_path, 0, 0, 2000, 1415, 0, 0, 400, 285)
+                this.data.ctx.draw()
+              } else {
+                this.data.ctx.drawImage(gypsum_path, 0, 0, 1062, 702, 0, 0, 400, 285)
+                this.data.ctx.draw()
+              }
             }
           }
         })
       } else {
-        this.data.ctx.drawImage(this.data.gypsum_path, 0, 0, 586, 416.666, 0, 0, 400, 285)
-        this.data.ctx.draw()
+        if (!this.data.is_n) {
+          this.data.ctx.drawImage(this.data.gypsum_path, 0, 0, 2000, 1415, 0, 0, 400, 285)
+          this.data.ctx.draw()
+        } else {
+          this.data.ctx.drawImage(this.data.gypsum_path, 0, 0, 1062, 702, 0, 0, 400, 285)
+          this.data.ctx.draw()
+        }
+        // this.data.ctx.drawImage(this.data.gypsum_path, 0, 0, 2000, 1415, 0, 0, 400, 285)
+        // this.data.ctx.draw()
       }
     },
-    add_mica: function (e) {
+    add_mica: function(e) {
+      console.log(this.data.mica)
       // var n = this.data.mica.search(/（[0-9]+.jpg/g);
       var mica_page = this.data.mica.replace(/(.*\/)*([^.]+).*/ig, "$2");
       console.log(mica_page)
       this.setData({
-        view_angle:mica_page*5
+        view_angle: mica_page * 5
       })
       if (!this.data.add_mica_flag) {
         this.draw_mica()
         this.setData({
-          add_mica_flag: true
+          add_mica_flag: true,
+          add_gypsum_flag: false
+        })
+      } else {
+        this.data.ctx.drawImage(this.data.tempFilePath, 0, 0, 586, 416.666, 0, 0, 400, 285)
+        this.data.ctx.draw()
+        this.setData({
+          add_mica_flag: false,
+          add_gypsum_flag: false
         })
       }
-      else {
-        this.data.ctx.drawImage(tempFilePath, 0, 0, 586, 416.666, 0, 0, 400, 285)
-        this.data.ctx.draw()
-      }
     },
-    draw_mica:function(){
+    draw_mica: function() {
       if (!this.data.mica_path) {
         wx.downloadFile({
           url: this.data.mica,
@@ -138,14 +285,26 @@ Component({
                 mica_path: mica_path,
                 ready: true
               })
-              this.data.ctx.drawImage(mica_path, 0, 0, 586, 416.666, 0, 0, 400, 285)
-              this.data.ctx.draw()
+              if (!this.data.is_n) {
+                this.data.ctx.drawImage(mica_path, 0, 0, 2000, 1415, 0, 0, 400, 285)
+                this.data.ctx.draw()
+              } else {
+                this.data.ctx.drawImage(mica_path, 0, 0, 829, 553, 0, 0, 400, 285)
+                this.data.ctx.draw()
+              }
             }
           }
         })
       } else {
-        this.data.ctx.drawImage(this.data.mica_path, 0, 0, 586, 416.666, 0, 0, 400, 285)
-        this.data.ctx.draw()
+        if (!this.data.is_n) {
+          this.data.ctx.drawImage(this.data.mica_path, 0, 0, 2000, 1415, 0, 0, 400, 285)
+          this.data.ctx.draw()
+        } else {
+          this.data.ctx.drawImage(this.data.mica_path, 0, 0, 829, 553, 0, 0, 400, 285)
+          this.data.ctx.draw()
+        }
+        // this.data.ctx.drawImage(this.data.mica_path, 0, 0, 2000, 1415, 0, 0, 400, 285)
+        // this.data.ctx.draw()
       }
     },
     touchstart: function(e) {

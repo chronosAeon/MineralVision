@@ -12,9 +12,10 @@
     /* animation: fadeinT 3s; */
     background-color: #f2f2f2;
     height: 100rpx;
-    width: 100%;
+    width: 700rpx;
     display: flex;
     flex-direction: row;
+    margin-left:25rpx;
 }
 .search-img{
     margin: auto 0 auto 20rpx;
@@ -47,5 +48,16 @@
   height:500rpx;
   margin-left:50rpx;
 }
+.trapezoid-0{
+  border-bottom: 65rpx solid #f2f2f2;
+  border-right: 17rpx solid transparent;
+  height: 0;
+  width: 105rpx;
+  margin-left:25rpx;
+  line-height: 65rpx;
+  font-size:35rpx;
+  padding-left: 10rpx;
+}
+
 
 

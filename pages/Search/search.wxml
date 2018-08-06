@@ -1,5 +1,14 @@
-
- <swiper hidden='{{focus}}' catchtap="swiperTap" indicator-dots="true" class="swiper" autoplay="true" interval="5000">
+<!-- <swiper hidden='{{focus}}' catchtap="swiperTap" indicator-dots="true" class="swiper" autoplay="true" interval="5000">
+  <swiper-item>
+    <image src="/image/mineral/gangyu.jpg" data-postId="{{0}}" class="swiper-image"></image>
+  </swiper-item>
+  <swiper-item>
+    <image src="/image/mineral/youlianshi.jpg" data-postId="{{1}}" class="swiper-image"></image>
+  </swiper-item>
+</swiper>  -->
+<!-- <search_bar style='margin-left:-200rpx'></search_bar> -->
+<view>
+<swiper hidden='{{focus}}' catchtap="swiperTap" indicator-dots="true" class="swiper" autoplay="true" interval="5000">
   <swiper-item>
     <image src="/image/mineral/gangyu.jpg" data-postId="{{0}}" class="swiper-image"></image>
   </swiper-item>
@@ -7,22 +16,28 @@
     <image src="/image/mineral/youlianshi.jpg" data-postId="{{1}}" class="swiper-image"></image>
   </swiper-item>
 </swiper> 
-<!-- <search_bar style='margin-left:-200rpx'></search_bar> -->
+<view class='trapezoid-0'><text style='margin-left:20rpx;'>搜索</text></view>
 <view class="search">
-  <icon class="search-img" type="search" size="13" color="#405f80"></icon>
   <input type="text" placeholder='{{example}}' placeholder-class="placehoder" bindfocus="onFocus" bindblur="blurFocus"  bindinput="bindKeyInput" bindconfirm='search' />
-  <view class='search-bt' hidden='{{!focus}}' catchtap='search'>搜索</view>
+  <!-- <view class='search-bt' hidden='{{!focus}}'>搜索</view> -->
+  <icon class="search-img" type="search" size="13" color="#007DAA" catchtap='search'></icon>
 </view>
-<view class='used' hidden='{{focus}}'>
-</view>
+
 <view wx:if='{{result != null}}' style='margin-top:50rpx;' >
-  <block wx:for='{{result}}'>
-    <view data-id='{{item.id}}' catchtap='showDetail'>
-      <view class='container-image'>
-        <image src='{{item.Img_url}}' class='image' mode='aspectFit'></image>
-      </view>
-        <text style='font-size: 46rpx; color: #8799DA;margin-left:300rpx;'>{{item.name}}</text>
-    </view>
-  </block>
+  <swiper indicator-dots="{{result.length>1?true:false}}" class="swiper" autoplay="true" interval="5000" bindchange='changeId' >
+    <block wx:for='{{result}}'>
+      <swiper-item>
+        <view data-id='{{item.id}}' catchtap='showDetail'>
+          <view class='container-image'>
+            <image src='{{item.Img_url}}' class='image' mode='aspectFit'></image>
+          </view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view style='font-size: 46rpx; color: #8799DA;text-align: center;' data-id='{{result[index].id}}' catchtap='showDetail'>
+    {{result[index].name}}
+  </view>
 </view> 
+</view>
 <!-- </view> -->
