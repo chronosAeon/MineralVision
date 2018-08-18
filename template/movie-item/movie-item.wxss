@@ -5,7 +5,7 @@
     padding: 0 22rpx;
 }
 .movieitem-img{
-    width: 190rpx;
+    width: 200rpx;
     height: 270rpx;
     padding-bottom: 20rpx;
 }

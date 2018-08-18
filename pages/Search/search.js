@@ -2,8 +2,7 @@ const app = getApp()
 
 Page({
   data: {
-    example: '铁矿石，石英',
-    index: 0
+    example: '铁矿石，石英'
   },
   onLoad: function () {
     wx.request({

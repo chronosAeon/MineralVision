@@ -6,31 +6,25 @@
   </block>
 </swiper>
 <view>
-  <text style='font-size: 46rpx; color: #8799DA; margin-left:40%;'>基本信息</text>
+  <text style='font-size: 46rpx; color: #8799DA;'>基本信息</text>
   <view class='detail'>
-    <view style='border-right: 7px solid #eee;margin-left:10rpx;'></view>
-    <view style='width:90%'>
+    <view style='border-right: 7px solid #eee;height:260rpx;margin-left:10rpx;'></view>
+    <view>
       <view class='information'>
         <text style='margin-right:100rpx;margin-left:20rpx;'>标本名:{{result.name}}</text>
-     
+        <text>英文名:{{result.nameen}}</text>
       </view>
-      <view class='information' style='background-color:#fff;' >
-        <text style='margin-left:20rpx;'>英文名:{{result.nameen}}</text>
+      <view wx:if='{{formula}}' class='information' style='background-color:#fff;padding-left:25rpx'>
+        晶体化学式:
       </view>
-      <view wx:if='{{formula}}' class='information'>
-         <text style='margin-right:100rpx;margin-left:20rpx;'>晶体化学式:</text>
-      </view>
-      <view wx:if='{{formula}}' class='information arr' style="{{arr.length <35? 'padding-left:24rpx':''}}">
+      <view wx:if='{{formula}}' class='information' style='background-color:#eee;display: flex;flex-direction: row;'>
         <block wx:for='{{arr}}'>
-          <view class="{{(arr[index] <10 && arr[index] != 0 &&arr[index+1] != '+' && arr[index+1] != '-' && arr[index-1] != '.')||(arr[index] == 0 && arr[index+1] =='-')||(arr[index-1] == 0 && arr[index] =='-')?'sub':''}}" style="{{(arr[index+1]=='+' || arr[index+1]=='-' && arr[index] <10 &&arr[index] != 0)||( arr[index] == '+' || arr[index] == '-' && arr[index-1] != 0)?'font-size:28rpx;marign-bottom:20rpx':'' }}"><view style="{{arr[index] == '.' ? 'line-height:25rpx;width:100%;':''}}">{{item}}</view></view>
+          <view class="{{arr[index] <10 && arr[index+1] != '+' && arr[index+1] != '-'?'sub':''}}" style="{{(arr[index+1]=='+' || arr[index+1]=='-' && arr[index] <10)||( arr[index] == '+' || arr[index] == '-')?'font-size:28rpx;marign-bottom:20rpx':'' }}">{{item}}</view>
         </block>
 
       </view>
-      <view class='information' >
-        <text style='margin-left:25rpx;'>基本分类:</text>
-      </view>
       <view class='information' style='background-color:#fff;'>
-        <text style='margin-left:25rpx;'>{{belong}}</text>
+        <text style='margin-left:25rpx;'>基本分类:{{belong}}</text>
       </view>
     </view>
   </view>
@@ -41,16 +35,13 @@
     <text style='font-size: 38rpx; color: #8799DA;'>描述</text>
 
     <block wx:for="{{array}}">
-      <view wx:if="{{item>30&&item<40}}">
-        <image src="https://www.netdcg.cdut.edu.cn/media/samples/micro_pics{{ImgUrlArr[item-31]}}"></image>
+      <view wx:if="{{item<10}}">
+        <image src="https://www.netdcg.cdut.edu.cn/media/samples/micro_pics{{ImgUrlArr[item-1]}}"></image>
       </view>
-      <view wx:elif="{{item>=40}}">
-        <video src='https://www.netdcg.cdut.edu.cn/media/samples/videos{{VideoUrlArr[item-40]}}'></video>
+      <view wx:elif="{{item>=10}}">
+        <video src='https://www.netdcg.cdut.edu.cn/media/samples/micro_pics{{VideoUrlArr[item-10]}}'></video>
       </view>
-    
-      <view wx:else>
-        {{item}}
-      </view>
+      <view wx:else="{{item}}">{{item}}</view>
 
     </block>
   </view>
@@ -63,27 +54,15 @@
     </picker>
     <view wx:if='{{current_scope=="N"}}'>
       <text>正交偏光:</text>
-      <scope id='kz' img_url='{{N}}' centerX='{{centerX}}' centerY='{{centerY}}' gypsum='{{gypsum}}' mica='{{mica}}' is_n='{{false}}'></scope>
+      <scope id='kz' img_url='{{N}}' centerX='{{centerX}}' centerY='{{centerY}}' gypsum='{{gypsum}}' mica='{{mica}}'></scope>
     </view>
     <view wx:if='{{current_scope=="n"}}'>
       <text>单偏光:</text>
-      <scope id='kz' img_url='{{n}}' centerX='{{centerX}}' centerY='{{centerY}}' gypsum='{{n_gypsum}}' mica='{{n_mica}}' is_n='{{true}}'></scope>
+      <scope id='kz' img_url='{{n}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
     </view>
     <view wx:if='{{current_scope=="CL"}}'>
       <text>锥光:</text>
-      <scope id='kz' img_url='{{CL}}' centerX='{{centerX}}' centerY='{{centerY}}' gypsum='{{CL_gypsum}}' mica='{{CL_mica}}' is_n='{{false}}'></scope>
+      <scope id='kz' img_url='{{CL}}' centerX='{{centerX}}' centerY='{{centerY}}'></scope>
     </view>
-  </view>
-  <view class="hr"></view>
-  <view class="cast">
-    <text class="cast-font">档案</text>
-    <scroll-view class="cast-imgs" scroll-x="true" style="width:100%">
-      <block wx:for="{{docs}}" wx:for-item="item">
-        <view class="cast-container" bindtap='doc_tap' data-docContent='{{item}}'>
-          <image class="cast-img" src="/image/mineral/doc.jpg"></image>
-          <text class="cast-name">{{item.mdTitle}}</text>
-        </view>
-      </block>
-    </scroll-view>
   </view>
 </view>
